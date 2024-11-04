@@ -8,3 +8,20 @@
 
 # Inline plots
 %matplotlib inline
+
+
+# Initialize NumerAPI - the official Python API client for Numerai
+from numerapi import NumerAPI
+napi = NumerAPI()
+
+# list the datasets and available versions
+all_datasets = napi.list_datasets()
+dataset_versions = list(set(d.split('/')[0] for d in all_datasets))
+print("Available versions:\n", dataset_versions)
+
+# Set data version to one of the latest datasets
+DATA_VERSION = "v5.0"
+
+# Print all files available for download for our version
+current_version_files = [f for f in all_datasets if f.startswith(DATA_VERSION)]
+print("Available", DATA_VERSION, "files:\n", current_version_files)
